@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wallet - Últimos Movimientos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Últimos Movimientos</h2>
+      <div class="form-group">
+        <label for="filtroTipo">Filtrar por tipo:</label>
+        <select id="filtroTipo" class="form-control">
+          <option value="todos">Todos</option>
+          <option value="deposito">Depósito</option>
+          <option value="compra">Compra</option>
+          <option value="transferencia">Transferencia recibida</option>
+        </select>
+      </div>
+      <ul id="listaMovimientos" class="list-group">
+      </ul>
+      <a href="menu.html" class="btn btn-secondary btn-block">Volver al Menú Principal</a>
+      <footer>Vista de tus movimientos recientes.</footer>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="transaction.js"></script>
+</body>
+</html>

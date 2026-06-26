@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wallet - Enviar Dinero</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Enviar Dinero</h2>
+      <h3>Contactos</h3>
+      <div class="form-row mb-2">
+        <div class="col">
+          <input id="buscarContacto" type="text" class="form-control" placeholder="Buscar por nombre o alias">
+        </div>
+        <div class="col-auto d-flex align-items-center">
+          <div class="d-flex flex-column flex-sm-row">
+            <button id="btnBuscar" class="btn btn-outline-primary mr-sm-1 mb-1 mb-sm-0">Buscar</button>
+            <button id="btnLimpiarBusqueda" class="btn btn-outline-secondary">Limpiar</button>
+          </div>
+        </div>
+      </div>
+
+      <ul id="listaContactos" class="list-group mb-3"></ul>
+
+      <button id="btnAgregarContacto" type="button" class="btn btn-primary btn-block">Agregar nuevo contacto</button>
+
+      <hr>
+
+      <div class="form-group">
+        <label for="monto">Monto a enviar:</label>
+        <input type="number" class="form-control" id="monto" placeholder="Ingresa el monto">
+      </div>
+
+      <button id="btnEnviarDinero" type="button" class="btn btn-info btn-block" style="display:none;">Enviar dinero</button>
+      <div id="sendConfirmation" class="mt-3 text-success"></div>
+      <a href="menu.html" class="btn btn-secondary btn-block">Volver al Menú Principal</a>
+      <footer>Envía dinero con una pantalla clara y sencilla.</footer>
+    </div>
+  </div>
+
+  <!-- Formulario emergente para agregar contacto -->
+  <div id="modal">
+    <div class="modal-inner">
+      <h3>Agregar nuevo contacto</h3>
+      <form id="formularioContacto">
+        <div class="form-group">
+          <label>Nombre y Apellido:</label>
+          <input type="text" class="form-control" id="nombre" required>
+        </div>
+        <div class="form-group">
+          <label>Número de CBU:</label>
+          <input type="text" class="form-control" id="cbu" required>
+        </div>
+        <div class="form-group">
+          <label>Alias:</label>
+          <input type="text" class="form-control" id="alias" required>
+        </div>
+        <div class="form-group">
+          <label>Nombre del Banco:</label>
+          <input type="text" class="form-control" id="banco" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Guardar contacto</button>
+      </form>
+      <button id="btnCancelarContacto" class="btn btn-secondary btn-block" type="button">Cancelar</button>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="sendmoney.js"></script>
+</body>
+</html>

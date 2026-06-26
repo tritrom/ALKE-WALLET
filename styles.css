@@ -1,0 +1,165 @@
+/* Estilos generales del cuerpo */
+body {
+  background: linear-gradient(135deg, #4f8ef7, #70c9ff);
+  color: #1b2a49;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Contenedor principal */
+.container {
+  width: 100%;
+  max-width: 460px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* Tarjeta principal */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+  padding: 76px;
+  max-width: 35%;
+  margin: 0 auto;
+}
+
+/* Títulos h2 */
+h2 {
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #0c4b8c;
+}
+/* Títulos h3 */
+h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0c4b8c;
+  margin-bottom: 15px;
+}
+
+/* Tarjeta de saldo */
+.balance-card {
+  background: #eef6ff;
+  border: 1px solid #c8ddff;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  padding: 18px;
+  text-align: center;
+}
+
+.balance-card h3 {
+  margin: 0;
+  font-size: 2rem;
+  color: #0b3f75;
+}
+
+.balance-card p {
+  color: #0c4b8c;
+  margin-bottom: 10px;
+}
+
+/* Botones */
+.btn {
+  border-radius: 12px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  line-height: 1.2;
+}
+
+.btn:last-child {
+  margin-bottom: 0;
+}
+
+/* Items de lista */
+.list-group-item {
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  background: #f8fbff;
+  color: #244a76;
+  padding: 15px;
+}
+
+/* Línea divisora */
+hr {
+  border-color: rgba(12, 75, 140, 0.18);
+  margin: 20px 0;
+}
+
+/* Pie de página */
+footer {
+  margin-top: 16px;
+  text-align: center;
+  color: #4f6d94;
+  font-size: 0.9rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 576px) {
+  .container {
+    margin: 20px auto;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .balance-card h3 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Buttons in btn-group: stack on extra-small, inline on sm+ */
+@media (max-width: 575.98px) {
+  .btn-group .btn {
+    display: block;
+    width: 100%;
+  }
+  .btn-group .btn + .btn {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Larger container widths for bigger screens */
+@media (min-width: 576px) {
+  .container { max-width: 540px; }
+}
+@media (min-width: 768px) {
+  .container { max-width: 720px; }
+  .card { padding: 30px; }
+}
+@media (min-width: 992px) {
+  .container { max-width: 960px; }
+}
+@media (min-width: 1200px) {
+  .container { max-width: 1140px; }
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+#modal .modal-inner {
+  background: white;
+  margin: 50px auto;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+}
