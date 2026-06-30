@@ -14,31 +14,54 @@ $(document).ready(function() {
 
   if (!auth()) return;
 
-  $('#saldo').text('$' + saldo());
+  // Animación de entrada: fadeInUp para la card
+  $('.card').addClass('anim-fade-in-up');
+  $('#mensajeRedireccion').hide();
+
+  // Animación de saldo: efecto contador
+  var $saldo = $('#saldo');
+  var finalSaldo = saldo();
+  $saldo.text('$0');
+  $({ count: 0 }).animate({ count: finalSaldo }, {
+    duration: 800,
+    easing: 'swing',
+    step: function() {
+      $saldo.text('$' + Math.round(this.count));
+    },
+    complete: function() {
+      $saldo.text('$' + finalSaldo).addClass('anim-count');
+      $('.balance-card').addClass('highlight');
+      setTimeout(function() {
+        $('.balance-card').removeClass('highlight');
+      }, 800);
+    }
+  });
+
+  function redirectWithAnimation(url, mensaje) {
+    var $msg = $('#mensajeRedireccion');
+    $msg.text(mensaje).fadeIn(300);
+    $('.btn').prop('disabled', true).addClass('anim-pulse');
+    setTimeout(function() {
+      $('.card').fadeOut(400, function() {
+        location = url;
+      });
+    }, 300);
+  }
 
   $('#btnDepositar').click(function() {
-    $('#mensajeRedireccion').text('Redirigiendo a depositar');
-    setTimeout(function() {
-      location = 'deposit.html';
-    }, 500);
+    redirectWithAnimation('deposit.html', 'Redirigiendo a depositar...');
   });
 
   $('#btnEnviar').click(function() {
-    $('#mensajeRedireccion').text('Redirigiendo a enviar dinero');
-    setTimeout(function() {
-      location = 'sendmoney.html';
-    }, 500);
+    redirectWithAnimation('sendmoney.html', 'Redirigiendo a enviar dinero...');
   });
 
   $('#btnMovimientos').click(function() {
-    $('#mensajeRedireccion').text('Redirigiendo a ultimos movimientos');
-    setTimeout(function() {
-      location = 'transaction.html';
-    }, 500);
+    redirectWithAnimation('transaction.html', 'Redirigiendo a últimos movimientos...');
   });
 
   $('#btnSalir').click(function() {
     localStorage.removeItem('logueado');
-    location = 'index.html';
+    redirectWithAnimation('index.html', 'Cerrando sesión...');
   });
 });

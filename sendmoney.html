@@ -13,8 +13,9 @@
       <h2>Enviar Dinero</h2>
       <h3>Contactos</h3>
       <div class="form-row mb-2">
-        <div class="col">
-          <input id="buscarContacto" type="text" class="form-control" placeholder="Buscar por nombre o alias">
+        <div class="col autocomplete-wrap">
+          <input id="buscarContacto" type="text" class="form-control" placeholder="Buscar por nombre o alias" autocomplete="off">
+          <div id="autocompleteLista" class="autocomplete-dropdown"></div>
         </div>
         <div class="col-auto d-flex align-items-center">
           <div class="d-flex flex-column flex-sm-row">

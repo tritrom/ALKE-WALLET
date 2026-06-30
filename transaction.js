@@ -28,11 +28,12 @@ $(document).ready(function() {
 
   function renderMovimientos(filtro) {
     var $lista = $('#listaMovimientos').empty();
+    var $mensaje = $('#mensajeMovimientos');
     var data = transacciones().filter(function(item) {
       return filtro === 'todos' || tipoRaw(item.tipo) === filtro;
     });
     var labels = {
-      deposito: 'Deposito',
+      deposito: 'Depósito',
       compra: 'Compra',
       transferencia: 'Transferencia recibida',
       otros: 'Otros'
@@ -43,23 +44,52 @@ $(document).ready(function() {
       transferencia: '[>]',
       otros: '[*]'
     };
+    var filtroLabels = {
+      todos: 'todos los movimientos',
+      deposito: 'depósitos',
+      compra: 'compras',
+      transferencia: 'transferencias recibidas'
+    };
 
     if (!data.length) {
       $lista.append('<li class="list-group-item">No hay movimientos registrados</li>');
+      if ($mensaje.length) {
+        $mensaje.text('No se encontraron ' + (filtroLabels[filtro] || 'movimientos')).fadeIn(300);
+      }
       return;
     }
 
-    $.each(data.reverse(), function(i, item) {
+    $.each(data.slice().reverse(), function(i, item) {
       var tipo = tipoRaw(item.tipo);
-      $lista.append('<li class="list-group-item">' + icons[tipo] + ' <strong>' + labels[tipo] + '</strong> - $' + item.monto + ' - ' + item.fecha + '</li>');
+      var $li = $('<li class="list-group-item item-enter">' + icons[tipo] + ' <strong>' + labels[tipo] + '</strong> — $' + item.monto + ' — ' + item.fecha + '</li>');
+      $lista.append($li);
+      // Animación escalonada de cada item
+      setTimeout(function() {
+        $li.addClass('item-enter-active');
+      }, i * 60);
     });
+
+    // Mensaje dinámico con cantidad de resultados
+    if ($mensaje.length) {
+      $mensaje.text('Mostrando ' + data.length + ' ' + (filtroLabels[filtro] || 'movimientos')).fadeIn(300);
+    }
   }
 
   if (!auth()) return;
 
+  // Animación de entrada
+  $('.card').addClass('anim-fade-in-up');
+
+  // Agregar contenedor para mensaje dinámico debajo del filtro
+  $('#filtroTipo').closest('.form-group').after('<div id="mensajeMovimientos" class="text-muted mb-3" style="display:none;"></div>');
+
   renderMovimientos('todos');
 
   $('#filtroTipo').change(function() {
-    renderMovimientos($(this).val());
+    var $lista = $('#listaMovimientos');
+    $lista.fadeOut(200, function() {
+      renderMovimientos($('#filtroTipo').val());
+      $lista.fadeIn(300);
+    });
   });
 });

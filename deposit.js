@@ -39,7 +39,11 @@ $(document).ready(function() {
 
   if (!auth()) return;
 
-  $('#saldoActual').text('$' + saldo());
+  // Animación de entrada
+  $('.card').addClass('anim-fade-in-up');
+
+  // Mostrar saldo inicial
+  $('#saldoActual').text('Saldo actual: $' + saldo()).hide().fadeIn(600);
 
   $('#formularioDeposito').submit(function(e) {
     e.preventDefault();
@@ -47,19 +51,45 @@ $(document).ready(function() {
     var monto = parseInt($('#monto').val(), 10);
 
     if (!monto || monto <= 0) {
-      $('#alert-container').html('<div class="alert alert-warning">Por favor ingresa un monto valido</div>');
-      $('#depositMessage').text('');
+      $('#alert-container').html('<div class="alert alert-warning">Por favor ingresa un monto valido</div>').hide().fadeIn(300);
+      $('#depositMessage').text('').hide();
       return;
     }
 
-    guardarSaldo(saldo() + monto);
+    var nuevoSaldo = saldo() + monto;
+    guardarSaldo(nuevoSaldo);
     agregarTransaccion('Deposito', monto);
-    $('#alert-container').html('<div class="alert alert-success">Deposito realizado con exito: $' + monto + '</div>');
-    $('#depositMessage').text('Has depositado $' + monto + '.');
-    $('#saldoActual').text('$' + saldo());
+
+    // Mensaje dinámico de éxito con animación
+    var $alert = $('#alert-container').hide();
+    $alert.html('<div class="alert alert-success">Depósito realizado con éxito: $' + monto + '</div>').fadeIn(400);
+
+    // Actualizar saldo con animación contador
+    var $saldo = $('#saldoActual');
+    var saldoAnterior = saldo() - monto;
+    $saldo.text('Saldo actual: $0');
+    $({ count: 0 }).animate({ count: nuevoSaldo }, {
+      duration: 600,
+      easing: 'swing',
+      step: function() {
+        $saldo.text('Saldo actual: $' + Math.round(this.count));
+      },
+      complete: function() {
+        $saldo.text('Saldo actual: $' + nuevoSaldo);
+      }
+    });
+
+    // Mensaje dinámico secundario
+    var $msg = $('#depositMessage').hide();
+    $msg.text('Has depositado $' + monto + ' — tu nuevo saldo es $' + nuevoSaldo).fadeIn(400);
+
+    // Deshabilitar botón y animar salida
+    $(this).find('button').prop('disabled', true).text('Depósito exitoso, redirigiendo...');
 
     setTimeout(function() {
-      location = 'menu.html';
+      $('.card').fadeOut(400, function() {
+        location = 'menu.html';
+      });
     }, 2000);
   });
 });

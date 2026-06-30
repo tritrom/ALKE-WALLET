@@ -163,3 +163,115 @@ footer {
   max-width: 400px;
   border-radius: 10px;
 }
+
+/* ===== Animaciones ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.03); }
+}
+
+@keyframes countHighlight {
+  0% { color: #0b3f75; }
+  50% { color: #28a745; }
+  100% { color: #0b3f75; }
+}
+
+.anim-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.anim-fade-in-down {
+  animation: fadeInDown 0.5s ease forwards;
+}
+
+.anim-pulse {
+  animation: pulse 0.4s ease;
+}
+
+.anim-count {
+  animation: countHighlight 0.8s ease;
+}
+
+/* Hover effects en botones */
+.btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, padding 0.15s ease !important;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Animación para items de lista */
+.list-group-item {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.list-group-item.item-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.list-group-item.item-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Autocomplete dropdown */
+.autocomplete-wrap {
+  position: relative;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #fff;
+  border: 1px solid #c8ddff;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+}
+
+.autocomplete-dropdown .autocomplete-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f4ff;
+  transition: background 0.15s ease;
+}
+
+.autocomplete-dropdown .autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-dropdown .autocomplete-item:hover,
+.autocomplete-dropdown .autocomplete-item.active {
+  background: #eef6ff;
+}
+
+/* Saldo animado en menú */
+.balance-card {
+  transition: box-shadow 0.3s ease;
+}
+
+.balance-card.highlight {
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.3);
+}

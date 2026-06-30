@@ -73,6 +73,49 @@ $(document).ready(function() {
 
   renderContactos();
 
+  // Autocompletar en buscar contacto
+  var $autoDropdown = $('#autocompleteLista');
+
+  function mostrarAutocomplete(busqueda) {
+    busqueda = (busqueda || '').toLowerCase().trim();
+    $autoDropdown.empty().hide();
+
+    if (!busqueda) return;
+
+    var resultados = contactos().filter(function(c) {
+      return (c.nombre + ' ' + c.alias + ' ' + c.banco).toLowerCase().indexOf(busqueda) > -1;
+    });
+
+    if (!resultados.length) return;
+
+    $.each(resultados, function(i, c) {
+      $autoDropdown.append(
+        '<div class="autocomplete-item" data-nombre="' + c.nombre + '">' +
+          '<strong>' + c.nombre + '</strong> <small class="text-muted">(Alias: ' + c.alias + ')</small>' +
+        '</div>'
+      );
+    });
+
+    $autoDropdown.fadeIn(150);
+  }
+
+  $('#buscarContacto').on('keyup', function() {
+    mostrarAutocomplete($(this).val());
+  });
+
+  $('#autocompleteLista').on('click', '.autocomplete-item', function() {
+    var nombre = $(this).data('nombre');
+    $('#buscarContacto').val(nombre);
+    $autoDropdown.fadeOut(100);
+    renderContactos(nombre);
+  });
+
+  $(document).on('click', function(e) {
+    if (!$(e.target).closest('.autocomplete-wrap').length) {
+      $autoDropdown.fadeOut(100);
+    }
+  });
+
   $('#btnAgregarContacto').click(function() {
     $('#modal').show();
   });
